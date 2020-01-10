@@ -15,10 +15,11 @@ function promptUser() {
             name: "employed",
             message: "Are you an employee?"
         }
-    ]).then(function ({ employed }) {
-//This if statement isn't reading variable, condition not being met
-        if (employed = true) { 
-            inquirer.prompt([
+    ]).then(function (firstAnswer) {
+        console.log(firstAnswer.employed);
+        //This if statement isn't reading variable, condition not being met
+        if (firstAnswer.employed = true) {
+            return inquirer.prompt([
                 {
                     type: "list",
                     name: "position",
@@ -26,14 +27,28 @@ function promptUser() {
                     choices: [
                         "Engineer",
                         "Intern",
-                        "Manager",
-                        "Ainslee"
+                        "Manager"
                     ]
                 }
             ]);
+        }
+    }).then(function (secondAnswer) {
+        console.log(secondAnswer.position);
+        //This if statement isn't reading variable, condition not being met
+        if (secondAnswer.position = "Intern") {
+            return inquirer.prompt([
+                {
+                    type: "input",
+                    name: "school",
+                    message: "What school did you attend?"
+                }
+            ])
         }
     });
 
 };
 
 promptUser();
+
+
+
