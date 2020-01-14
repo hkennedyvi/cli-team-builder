@@ -3,17 +3,23 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const inquirer = require("inquirer");
+const joi = require("@hapi/joi");
+const companyTeam = [];
+
 
 function startTeam() {
     return inquirer.prompt([
         {
             type: "input",
             name: "name",
-            message: "What is your manager's name?"
+            message: "What is your manager's name?",
+            validate: function validateName(name) {
+                return name !== "";
+            }
         }, {
             type: "input",
             name: "id",
-            message: "What is their ID?"
+            message: "What is their ID?",
         }, {
             type: "input",
             name: "email",
@@ -23,7 +29,7 @@ function startTeam() {
             name: "office",
             message: "What is their office number?"
         }
-    ]).then(function (managerAns) {
+    ]).then(function addTeamMember(managerAns) {
         inquirer.prompt([
             {
                 type: "list",
@@ -36,35 +42,85 @@ function startTeam() {
                 ]
             }
         ]).then(function (answer) {
-             switch(answer.position) {
-            case "Intern":
-              console.log("YOU ARE AN INTERN");
-              addIntern();// code block
-              break;
-            case "Engineer":
-              console.log("YOU ARE AN ENGINEER");
-              addEngineer();// code block
-              break;
-            default:
-              console.log("YOUR TEAM IS BUILT");
-              constructTeam();// code block
-          }
+            switch (answer.position) {
+                case "Intern":
+                    console.log("YOU ARE AN INTERN");
+                    addIntern();// code block
+                    break;
+                case "Engineer":
+                    console.log("YOU ARE AN ENGINEER");
+                    addEngineer();// code block
+                    break;
+                default:
+                    console.log("YOUR TEAM IS BUILT");
+                    constructTeam();// code block
+            }
         })
         function addIntern() {
             console.log("Congrats, Intern");
-        }
+            inquirer.prompt([
+                {
+                    type: "input",
+                    name: "intern_name",
+                    message: "What is this intern's name?"
+                }, {
+                    type: "input",
+                    name: "intern_id",
+                    message: "What is their ID?"
+                }, {
+                    type: "input",
+                    name: "intern_email",
+                    message: "What is their email?"
+                }, {
+                    type: "input",
+                    name: "intern_school",
+                    message: "What school do they attend?"
+                },
+            ]).then(function (internAns) {
+                const newIntern = new Intern(internAns.intern_name, internAns.intern_id, internAns.intern_email, internAns.intern_school);
+                console.log(newIntern);
+                companyTeam.push(newIntern);
+                console.log(companyTeam);
+            });
+        };
         function addEngineer() {
             console.log("Congrats, Engineer");
+            inquirer.prompt([
+                {
+                    type: "input",
+                    name: "engineer_name",
+                    message: "What is this engieneer's name?"
+                }, {
+                    type: "input",
+                    name: "engineer_id",
+                    message: "What is their ID?"
+                }, {
+                    type: "input",
+                    name: "engineer_email",
+                    message: "What is their email?"
+                }, {
+                    type: "input",
+                    name: "engineer_github",
+                    message: "What is their github username?"
+                },
+            ]).then(function (engineerAns) {
+                const newEngineer = new Engineer(engineerAns.engineer_name, engineerAns.engineer_id, engineerAns.engineer_email, engineerAns.engineer_github);
+                console.log(newEngineer);
+                companyTeam.push(newEngineer);
+                console.log(companyTeam);
+            });
         }
         function constructTeam() {
             console.log("Congrats, Team");
         }
 
-       
+
     })
 };
 
+
 startTeam();
+
 
 
 
