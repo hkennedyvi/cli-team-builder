@@ -29,7 +29,12 @@ function startTeam() {
             name: "office",
             message: "What is their office number?"
         }
-    ]).then(function addTeamMember(managerAns) {
+    ]).then(function addManager(managerAns) {
+        const newManager = new Manager(managerAns.name, managerAns.id, managerAns.email, managerAns.office);
+        console.log(newManager);
+        companyTeam.push(newManager);
+        console.log(companyTeam);
+    }).then(function addTeamMember() {
         inquirer.prompt([
             {
                 type: "list",
@@ -81,6 +86,7 @@ function startTeam() {
                 console.log(newIntern);
                 companyTeam.push(newIntern);
                 console.log(companyTeam);
+                addTeamMember();
             });
         };
         function addEngineer() {
@@ -108,6 +114,7 @@ function startTeam() {
                 console.log(newEngineer);
                 companyTeam.push(newEngineer);
                 console.log(companyTeam);
+                addTeamMember();
             });
         }
         function constructTeam() {
