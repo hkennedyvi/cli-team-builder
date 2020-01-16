@@ -1,60 +1,4 @@
-const Employee = require("./lib/Employee");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
-const Manager = require("./lib/Manager");
-const fs = require("fs");
-
-
-const managerCard = generateManagerCard = (managerData) => {
-    console.log(`<div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">${managerData[i].name}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">getRole : Manager</h6>
-            <p class="card-text">
-                <ul>
-                    <li>ID: ${managerData[i].id}</li>
-                    <li>EMAIL: ${managerData[i].email}</li>
-                    <li>OFFICE: ${managerData[i].officeNumber}</li>
-                </ul>
-            </p>
-        </div>
-    </div>`);
-};
-
-const internCard = generateInternCard = (internData) => {
-    console.log(`<div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">${internData[0].name}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">getRole : Manager</h6>
-            <p class="card-text">
-                <ul>
-                    <li>ID: ${internData[0].id}</li>
-                    <li>EMAIL: ${internData[0].email}</li>
-                    <li>SCHOOL: ${internData[0].school}</li>
-                </ul>
-            </p>
-        </div>
-    </div>`);
-};
-
-const engineerCard = generateEngineerCard = (engineerData) => {
-    console.log(`<div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">${engineerData[0].name}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">getRole : Manager</h6>
-            <p class="card-text">
-                <ul>
-                    <li>ID: ${engineerData[0].id}</li>
-                    <li>EMAIL: ${engineerData[0].email}</li>
-                    <li>GITHUB: ${engineerData[0].github}</li>
-                </ul>
-            </p>
-        </div>
-    </div>`);
-};
-
-const generateHTML = (managerCard, engineerCard, internCard) => {
-    return `<!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     
     <head>
@@ -71,9 +15,51 @@ const generateHTML = (managerCard, engineerCard, internCard) => {
             <h1>YOUR TEAM</h1>
         </header>
         <main>
-           ${managerCard}
-            ${internCard}
-            ${engineerCard}
+           (managerData) => {
+    console.log(`<div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">${managerData[i].name}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">getRole : Manager</h6>
+            <p class="card-text">
+                <ul>
+                    <li>ID: ${managerData[i].id}</li>
+                    <li>EMAIL: ${managerData[i].email}</li>
+                    <li>OFFICE: ${managerData[i].officeNumber}</li>
+                </ul>
+            </p>
+        </div>
+    </div>`);
+}
+            (internData) => {
+    console.log(`<div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">${internData[0].name}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">getRole : Manager</h6>
+            <p class="card-text">
+                <ul>
+                    <li>ID: ${internData[0].id}</li>
+                    <li>EMAIL: ${internData[0].email}</li>
+                    <li>SCHOOL: ${internData[0].school}</li>
+                </ul>
+            </p>
+        </div>
+    </div>`);
+}
+            (engineerData) => {
+    console.log(`<div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">${engineerData[0].name}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">getRole : Manager</h6>
+            <p class="card-text">
+                <ul>
+                    <li>ID: ${engineerData[0].id}</li>
+                    <li>EMAIL: ${engineerData[0].email}</li>
+                    <li>GITHUB: ${engineerData[0].github}</li>
+                </ul>
+            </p>
+        </div>
+    </div>`);
+}
         </main>
     
     </body>
@@ -89,22 +75,4 @@ const generateHTML = (managerCard, engineerCard, internCard) => {
     <script src="app.js"></script>
     <script src="htmlGenerate.js"></script>
     
-    </html>`
-}
-
-
-
-html = generateHTML(managerCard, engineerCard, internCard);
-
-fs.writeFile("myTeaml.html", html, function(err) {
-    if (err) {
-        return console.log(err);
-    }
-});
-
-module.exports = {
-    generateManagerCard: generateManagerCard,
-    generateInternCard: generateInternCard,
-    generateEngineerCard: generateEngineerCard,
-};
-
+    </html>

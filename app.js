@@ -6,10 +6,6 @@ const inquirer = require("inquirer");
 const joi = require("@hapi/joi");
 const generate = require("./htmlGenerate");
 const companyTeam = [];
-const mgmtTeam = [];
-const engineerTeam = [];
-const internTeam = [];
-
 
 function startTeam() {
     return inquirer.prompt([
@@ -37,11 +33,6 @@ function startTeam() {
         const newManager = new Manager(managerAns.name, managerAns.id, managerAns.email, managerAns.office);
 
         companyTeam.push(newManager);
-        mgmtTeam.push(newManager);
-        console.log("Here is your full team:");
-        console.log(companyTeam);
-        console.log("Here is your management team:");
-        console.log(mgmtTeam);
 
     }).then(function addTeamMember() {
         inquirer.prompt([
@@ -92,13 +83,8 @@ function startTeam() {
                 },
             ]).then(function (internAns) {
                 const newIntern = new Intern(internAns.intern_name, internAns.intern_id, internAns.intern_email, internAns.intern_school);
-                
+
                 companyTeam.push(newIntern);
-                internTeam.push(newIntern);
-                console.log("Here is your full team:");
-                console.log(companyTeam);
-                console.log("Here is your intern team:");
-                console.log(internTeam);
 
                 addTeamMember();
             });
@@ -125,33 +111,41 @@ function startTeam() {
                 },
             ]).then(function (engineerAns) {
                 const newEngineer = new Engineer(engineerAns.engineer_name, engineerAns.engineer_id, engineerAns.engineer_email, engineerAns.engineer_github);
-                
+
                 companyTeam.push(newEngineer);
-                engineerTeam.push(newEngineer);
-                console.log("Here is your full team:");
-                console.log(companyTeam);
-                console.log("Here is your engineer team:")
-                console.log(engineerTeam);
-                
+
                 addTeamMember();
             });
         }
         function constructTeam() {
-            
+
             console.log("Congrats, Team");
-            console.log(companyTeam[0] instanceof Manager);
             // console.log(Object.keys(companyTeam[0));
-            if (companyTeam[0] instanceof Manager) {
-                generate.generateManager(companyTeam[0]);
-            } else if (companyTeam[0] instanceof Intern) {
-                generate.generateIntern();
-            } else if (companyTeam[0] instanceof Engineer) {
-                generate.generateEngineer();
-            } else throw new Error("Missing team member");
+            for (i = 0; i < companyTeam.length; i++) {
+                if (companyTeam[i] instanceof Manager) {
+
+                    mgmtTeam = [];
+                    mgmtTeam.push(companyTeam[i]);
+                    generate.generateManagerCard(mgmtTeam);
+
+                } else if (companyTeam[i] instanceof Intern) {
+
+                    internTeam = [];
+                    internTeam.push(companyTeam[i]);
+                    generate.generateInternCard(internTeam);
+
+                } else if (companyTeam[i] instanceof Engineer) {
+
+                    engineerTeam = [];
+                    engineerTeam.push(companyTeam[i]);
+                    generate.generateEngineerCard(engineerTeam);
+
+                } else throw new Error("Missing team member");
+            }
         };
 
-
     });
+
 };
 
 startTeam();
