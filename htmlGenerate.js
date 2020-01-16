@@ -6,10 +6,13 @@ const fs = require("fs");
 
 
 const managerCard = generateManagerCard = (managerData) => {
-    console.log(`<div class="card" style="width: 18rem;">
+    return `<div class="column col-md-3">
+    <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">${managerData[i].name}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">getRole : Manager</h6>
+            <h6 class="card-subtitle mb-2 text-muted">getRole : Manager
+                <i class="fas fa-coffee"></i>
+            </h6>
             <p class="card-text">
                 <ul>
                     <li>ID: ${managerData[i].id}</li>
@@ -18,14 +21,18 @@ const managerCard = generateManagerCard = (managerData) => {
                 </ul>
             </p>
         </div>
-    </div>`);
+    </div>
+</div>`;
 };
 
 const internCard = generateInternCard = (internData) => {
-    console.log(`<div class="card" style="width: 18rem;">
+    return `<div class=" column col-md-3">
+    <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">${internData[0].name}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">getRole : Manager</h6>
+            <h6 class="card-subtitle mb-2 text-muted">getRole : Intern
+                <i class="fas fa-user-graduate"></i>
+            </h6>
             <p class="card-text">
                 <ul>
                     <li>ID: ${internData[0].id}</li>
@@ -34,14 +41,18 @@ const internCard = generateInternCard = (internData) => {
                 </ul>
             </p>
         </div>
-    </div>`);
+    </div>
+</div>`;
 };
 
 const engineerCard = generateEngineerCard = (engineerData) => {
-    console.log(`<div class="card" style="width: 18rem;">
+    return `<div class="column col-md-3">
+    <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">${engineerData[0].name}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">getRole : Manager</h6>
+            <h6 class="card-subtitle mb-2 text-muted">getRole : Engineer
+                <i class="fas fa-cogs"></i>
+            </h6>
             <p class="card-text">
                 <ul>
                     <li>ID: ${engineerData[0].id}</li>
@@ -50,7 +61,8 @@ const engineerCard = generateEngineerCard = (engineerData) => {
                 </ul>
             </p>
         </div>
-    </div>`);
+    </div>
+</div>`;
 };
 
 const generateHTML = (managerCard, engineerCard, internCard) => {
@@ -63,17 +75,47 @@ const generateHTML = (managerCard, engineerCard, internCard) => {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
         <title>Team Builder</title>
     </head>
+    <style>
+        header {
+            text-align: center;
+            background-color: aquamarine;
+            color: white;
+            font-weight: 300;
+            padding-bottom: 10px;
+        }
+    
+        main {
+            background-color: lightsteelblue;
+            height: 750px;
+        }
+    
+        .card {
+            margin: 25px;
+        }
+    
+        .column {
+            margin: 20px;
+        }
+    </style>
     
     <body>
         <header>
             <h1>YOUR TEAM</h1>
         </header>
         <main>
-           ${managerCard}
-            ${internCard}
-            ${engineerCard}
+            <div class="container">
+                <div class="row">
+                    ${managerCard}
+    
+                    ${internCard}
+    
+                    ${engineerCard}
+                </div>
+            </div>
+    
         </main>
     
     </body>
@@ -92,15 +134,15 @@ const generateHTML = (managerCard, engineerCard, internCard) => {
     </html>`
 }
 
+html = generateHTML(managerCard, internCard, engineerCard);
 
-
-html = generateHTML(managerCard, engineerCard, internCard);
-
-fs.writeFile("myTeaml.html", html, function(err) {
+fs.writeFile("myTeam.html", html, function(err){
     if (err) {
         return console.log(err);
     }
 });
+
+
 
 module.exports = {
     generateManagerCard: generateManagerCard,

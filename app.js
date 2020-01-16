@@ -2,10 +2,12 @@ const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+const fs = require("fs");
 const inquirer = require("inquirer");
 const joi = require("@hapi/joi");
 const generate = require("./htmlGenerate");
 const companyTeam = [];
+
 
 function startTeam() {
     return inquirer.prompt([
@@ -149,106 +151,3 @@ function startTeam() {
 };
 
 startTeam();
-
-
-
-
-// const questions = [
-//     {
-//         type: "confirm",
-//         name: "employed",
-//         message: "Are you an employee?"
-//     },{
-//         type: "list",
-//         name: "position",
-//         message: "What is your position?",
-//         choices: [
-//             "Engineer",
-//             "Intern",
-//             "Manager"
-//         ]
-//     },{
-//         type: "input",
-//         name: "school",
-//         message: "What school did you attend?",
-//         when : function(answers) {
-//             if (answers.position === "Intern") {
-//                 return questions.school;
-//             };
-//           }
-//     }
-// ]
-
-// // const positionQ = [
-// //     {
-// //         type: "list",
-// //         name: "position",
-// //         message: "What is your position?",
-// //         choices: [
-// //             "Engineer",
-// //             "Intern",
-// //             "Manager"
-// //         ],
-// //         when : function(answers) {
-// //             if (answers.employed == true) {
-// //                 return positionQ;
-// //             }
-// //         }
-// //     }
-// // ]
-
-
-
-// function promptApplicant () {
-//     return inquirer.prompt(questions, function(answers) {
-//         console.log(answers);
-//     });
-// };
-
-// promptApplicant();
-
-
-// // function promptUser() {
-// //     return inquirer.prompt([
-// //         {
-// //             type: "confirm",
-// //             name: "employed",
-// //             message: "Are you an employee?"
-// //         }
-// //     ]).then(function (firstAnswer) {
-// //         console.log(firstAnswer.employed);
-// //         //This if statement isn't reading variable, condition not being met
-// //         if (firstAnswer.employed = true) {
-// //             return inquirer.prompt([
-// //                 {
-// //                     type: "list",
-// //                     name: "position",
-// //                     message: "What is your position?",
-// //                     choices: [
-// //                         "Engineer",
-// //                         "Intern",
-// //                         "Manager"
-// //                     ]
-// //                 }
-// //             ]);
-// //         }
-// //     }).then(function (secondAnswer) {
-// //         console.log(secondAnswer.position);
-// //         //This if statement isn't reading variable, condition not being met
-// //         if (secondAnswer.position = "Intern") {
-// //             return inquirer.prompt([
-// //                 {
-// //                     type: "input",
-// //                     name: "school",
-// //                     message: "What school did you attend?"
-// //                 }
-// //             ])
-// //         }
-// //     });
-
-// // };
-
-// promptUser();
-
-
-
