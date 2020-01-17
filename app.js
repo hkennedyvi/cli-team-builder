@@ -7,6 +7,9 @@ const inquirer = require("inquirer");
 const joi = require("@hapi/joi");
 const generate = require("./htmlGenerate");
 const companyTeam = [];
+let managerHTML;
+let internHTML;
+let engineerHTML;
 
 
 function startTeam() {
@@ -128,22 +131,29 @@ function startTeam() {
 
                     mgmtTeam = [];
                     mgmtTeam.push(companyTeam[i]);
-                    generate.generateManagerCard(mgmtTeam);
+                    managerHTML = generate.generateManagerCard(mgmtTeam);
 
                 } else if (companyTeam[i] instanceof Intern) {
 
                     internTeam = [];
                     internTeam.push(companyTeam[i]);
-                    generate.generateInternCard(internTeam);
+                    internHTML = generate.generateInternCard(internTeam);
 
                 } else if (companyTeam[i] instanceof Engineer) {
 
                     engineerTeam = [];
                     engineerTeam.push(companyTeam[i]);
-                    generate.generateEngineerCard(engineerTeam);
+                    engineerHTML = generate.generateEngineerCard(engineerTeam);
 
                 } else throw new Error("Missing team member");
             }
+            html = generate.generateHTML(managerHTML, internHTML, engineerHTML);
+
+            fs.writeFile("myTeam.html", html, function(err){
+                if (err) {
+                    return console.log(err);
+                }
+            });
         };
 
     });

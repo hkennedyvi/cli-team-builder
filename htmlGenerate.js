@@ -45,7 +45,7 @@ const internCard = generateInternCard = (internData) => {
 </div>`;
 };
 
-const engineerCard = generateEngineerCard = (engineerData) => {
+const generateEngineerCard = (engineerData) => {
     return `<div class="column col-md-3">
     <div class="card" style="width: 18rem;">
         <div class="card-body">
@@ -134,19 +134,10 @@ const generateHTML = (managerCard, engineerCard, internCard) => {
     </html>`
 }
 
-html = generateHTML(managerCard, internCard, engineerCard);
-
-fs.writeFile("myTeam.html", html, function(err){
-    if (err) {
-        return console.log(err);
-    }
-});
-
-
-
 module.exports = {
     generateManagerCard: generateManagerCard,
     generateInternCard: generateInternCard,
     generateEngineerCard: generateEngineerCard,
+    generateHTML: generateHTML
 };
 
