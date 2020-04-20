@@ -1,4 +1,4 @@
-# homework10.github.io
+# CLI Team Builder
 
 This CLI application allows its user to easily create an html file that displays a devloper team.
 
